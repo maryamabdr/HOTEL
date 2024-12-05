@@ -1,6 +1,7 @@
 import tkinter as tk
 from tkinter import Label, Button, PhotoImage
 import os
+from signlog import opensign
 
 def open_room_selection(menu):
     room_selection_window = tk.Toplevel(menu)
@@ -59,18 +60,23 @@ def open_room_selection(menu):
         member_price_label = Label(room_frame, text="€80 / NIGHT", font=("Arial", 12), fg="white", bg="#36335A")
         member_price_label.grid(row=2, column=2, sticky="e", padx=10)
 
-        flexible_rate_label = Label(room_frame, text="Flexible Rate:", font=("Arial", 12, "bold"), fg="white", bg="#36335A")
+        flexible_rate_label = Label(room_frame, text="Non-Member Rate:", font=("Arial", 12, "bold"), fg="white", bg="#36335A")
         flexible_rate_label.grid(row=3, column=1, sticky="w", padx=10)
         flexible_price_label = Label(room_frame, text="€90 / NIGHT", font=("Arial", 12), fg="white", bg="#36335A")
         flexible_price_label.grid(row=3, column=2, sticky="e", padx=10)
 
-        member_button = Button(room_frame, text="Select", font=("Arial", 12), bg="#0b5394", fg="white", width=10)
+        member_button = Button(room_frame, text="Select", font=("Arial", 14, "bold"), fg="#F1C40F", width=15, height=2, relief="flat", command=lambda: opensign(menu))
         member_button.grid(row=2, column=3, padx=10)
 
-        flexible_button = Button(room_frame, text="Select", font=("Arial", 12), bg="#0b5394", fg="white", width=10)
+        flexible_button = Button(room_frame, text="Select", font=("Arial", 14, "bold"), fg="#F1C40F", width=15, height=2, relief="flat", command=lambda: opensign(menu))
         flexible_button.grid(row=3, column=3, padx=10)
 
     inner_frame.update_idletasks()
     canvas.config(scrollregion=canvas.bbox("all"))
     
     room_selection_window.mainloop()
+
+
+
+
+#command=lambda: opensign(menu)
