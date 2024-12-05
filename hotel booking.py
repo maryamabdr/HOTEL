@@ -87,7 +87,7 @@ except Exception as e:
 title = tk.Label(inner_frame, text="Welcome to Marbella Hotel", font=("Helvetica", 28, "bold"), bg="#36335A", fg="#C3A464")
 title.pack(pady=20)
 
-subtitle = tk.Label(inner_frame, text="Your luxury escape awaits!", font=("Helvetica", 18, "italic"), bg="#36335A", fg="#FDFEFE")
+subtitle = tk.Label(inner_frame, text="The Gold Standard", font=("Helvetica", 18, "italic"), bg="#36335A", fg="#FDFEFE")
 subtitle.pack(pady=10)
 
 
