@@ -28,7 +28,7 @@ class RoomSelection:
         inner_frame = tk.Frame(canvas, bg="#C3A464", padx=10, pady=10)
         canvas.create_window((0, 0), window=inner_frame, anchor="nw")
 
-        rooms = [
+        rooms = [                                   #room info
             ("Single Room", "1 Person", 80, 90),
             ("Twin Room", "2 People", 120, 140),
             ("Double Room", "2 People", 160, 180),
@@ -47,14 +47,14 @@ class RoomSelection:
             room_frame.grid(row=i, column=0, padx=10, pady=20, sticky="nsew")
 
             try:
-                room_img = Image.open(room_image_path)
+                room_img = Image.open(room_image_path)          #open image
                 room_img = room_img.resize((200, 150), Image.Resampling.LANCZOS)  
                 room_img = ImageTk.PhotoImage(room_img) 
 
                 img_label = Label(room_frame, image=room_img)
                 img_label.image = room_img  
                 img_label.grid(row=0, column=0, rowspan=4, padx=10, pady=10)
-            except Exception as e:
+            except Exception as e:                  #in case of failure
                 img_label = Label(room_frame, text="Image Not Found", bg="gray", width=50, height=15)
                 img_label.grid(row=0, column=0, rowspan=4, padx=10, pady=10)
 
@@ -72,7 +72,7 @@ class RoomSelection:
             flexible_rate_label = Label(room_frame, text="Non-Member Rate:", font=("Arial", 12, "bold"), fg="white", bg="#36335A")
             flexible_rate_label.grid(row=3, column=1, sticky="w", padx=10)
             flexible_price_label = Label(room_frame, text=f"€{flexible_price} / NIGHT", font=("Arial", 12), fg="white", bg="#36335A")
-            flexible_price_label.grid(row=3, column=2, sticky="e", padx=10)
+            flexible_price_label.grid(row=3, column=2, sticky="e", padx=10) #prices
 
             member_button = Button(room_frame, text="Select", font=("Arial", 14, "bold"), fg="#F1C40F", width=15, height=2, relief="flat", 
                                    command=lambda room_name=room_name, price=member_price: self.update_selected_room(room_name, price))
@@ -80,7 +80,7 @@ class RoomSelection:
 
             flexible_button = Button(room_frame, text="Select", font=("Arial", 14, "bold"), fg="#F1C40F", width=15, height=2, relief="flat", 
                                      command=lambda room_name=room_name, price=flexible_price: self.update_selected_room(room_name, price))
-            flexible_button.grid(row=3, column=3, padx=10)
+            flexible_button.grid(row=3, column=3, padx=10) #buttons selecting the room
 
         inner_frame.update_idletasks()
         canvas.config(scrollregion=canvas.bbox("all"))

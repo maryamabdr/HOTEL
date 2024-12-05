@@ -2,12 +2,14 @@ import tkinter as tk
 from tkinter import messagebox, ttk
 from tkcalendar import Calendar
 from PIL import Image, ImageTk
-from signlog import opensign
 import os
 from datetime import datetime
 from room_selection import RoomSelection
 
 
+def open_booking_window():
+    from signlog import opensign
+    opensign(menu) #open the sign-in window
 
 selected_room = None  
 
@@ -15,7 +17,7 @@ class HotelBooking:
     def __init__(self):
         self.selected_room = None  
 
-    def update_selected_room(self, room_name, price):
+    def update_selected_room(self, room_name, price): #method to update selected room
 
         self.selected_room = {"room_name": room_name, "price": price}
         print(f"Room {room_name} selected with price {price}")
@@ -30,7 +32,7 @@ def show_calendar(label, date_type):
     def select_date():
         selected_date = cal.selection_get()
         label.config(text=selected_date)
-        
+        #update either start or end date label based on date_type
         if date_type == 'start':
             start_date_label.config(text=selected_date)
         elif date_type == 'end':
@@ -47,8 +49,8 @@ def show_calendar(label, date_type):
     select_button = tk.Button(calendar_window, text="Select", command=select_date)
     select_button.pack(pady=10)
 
-def calculate_total_cost(days_stayed, room_price):
-    return days_stayed * room_price
+def calculate_total_cost(days_stayed, room_price): #function to calculate total booking cost
+    return days_stayed * room_price #multiply days stayed by room price
 
 def calculate_days():
     start_date_str = start_date_label.cget("text")
@@ -68,7 +70,7 @@ def calculate_days():
     except ValueError:
         return None
 
-def book_now():
+def book_now(): #handle the booking process
     selected_room_data = selected_room 
     selected_destination = destination_var.get()
 
@@ -88,7 +90,7 @@ def book_now():
 
             total_price = selected_room_data['price'] * days_stayed
 
-
+            #show booking details in a message box
             messagebox.showinfo("Booking", f"Booking successful!\nDestination: {selected_destination}\nCheck-in: {start_date_label.cget('text')}\nCheck-out: {end_date_label.cget('text')}\nRoom: {selected_room_data['room_name']}\nPrice: €{selected_room_data['price']} / NIGHT\nTotal Days: {days_stayed} days\nTotal Price: €{total_price}")
 
 
@@ -125,12 +127,12 @@ image_path = os.path.join(script_dir, "exterior.jpeg")
 
 
 try:
-    bg_image = Image.open(image_path)
+    bg_image = Image.open(image_path) #open image
     bg_image = bg_image.resize((1000, 700), Image.Resampling.LANCZOS)
     bg_photo = ImageTk.PhotoImage(bg_image)
     bg_label = tk.Label(inner_frame, image=bg_photo)
     bg_label.place(relwidth=1, relheight=1)
-except Exception as e:
+except Exception as e:                      #in case image did not open 
     print(f"Error loading image: {e}")
     bg_label = tk.Label(inner_frame, text="Background Image Not Found", bg="gray", font=("Arial", 20))
     bg_label.place(relwidth=1, relheight=1)
